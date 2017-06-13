@@ -99,11 +99,11 @@ namespace LendingClubSoftware
         {
             LendingClubV1Client Client = new LendingClubV1Client(AuthorizationToken, InvestorId);
             NotesOwnedResponse getNotes = new NotesOwnedResponse();
-            Note mNote = new Note();
+            //Note mNote = new Note();
             try
             {
                 getNotes.MyNotes = new List<Note>();
-                getNotes.MyNotes.Add(mNote);
+                //getNotes.MyNotes.Add(mNote);
 
                 getNotes = Client.AccountResource.GetNotesOwned();
                 
