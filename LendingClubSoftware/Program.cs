@@ -5,16 +5,53 @@ using System.Text;
 using System.Threading.Tasks;
 using LendingClubDotNet.Client.v1;
 using LendingClubDotNet.Models.Responses;
+using Microsoft.Win32.TaskScheduler;
+using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 
 namespace LendingClubSoftware
 {
     class Program
     {
-        
+       
         //This is the entry point of the software.
         //This is the first code that will run when you start the software.
         static void Main(string[] args)
         {
+          
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+
+            Console.WriteLine(myPath);
+            Console.WriteLine(myDir);
+            Console.WriteLine(realpath);
+           
+            // Get the service on the local machine
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+
+                // Create a trigger that will fire the task at this time every specific time of the day                
+                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(10)});
+
+                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("06:00:00 AM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
+               
+                 // Create an action that will launch Notepad whenever the trigger fires
+                td.Actions.Add(new ExecAction(realpath,null, null));
+                
+                
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition("Test", td);
+
+                // Remove the task we just created
+                if(td.Actions  == null)
+                    ts.RootFolder.DeleteTask("Test");
+            }
+
             //This initializes the title of the software
             Console.Title = "Lending Club Software v1.0.0";
            
