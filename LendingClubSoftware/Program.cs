@@ -21,41 +21,48 @@ namespace LendingClubSoftware
         static void Main(string[] args)
         {
           
-            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
-            string myDir = Path.GetDirectoryName(myPath);
-            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+            //string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            //string myDir = Path.GetDirectoryName(myPath);
+            //string realpath = Path.Combine(myDir, "TaskScheduler.exe");
               
             //This initializes the title of the software
             Console.Title = "Lending Club Software v1.0.0";
            
             //this changes the color of the text.
-            Console.ForegroundColor = ConsoleColor.DarkGreen;  
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
 
-            // Get the service on the local machine
-            using (TaskService ts = new TaskService())
-            {
-                // Create a new task definition and assign properties
-                TaskDefinition td = ts.NewTask();
-                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+            //// Get the service on the local machine
+            //using (TaskService ts = new TaskService())
+            //{
+            //    // Create a new task definition and assign properties
+            //    TaskDefinition td = ts.NewTask();
+            //    td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
 
-                // Create a trigger that will fire the task at this time every specific time of the day                
-                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(5)});
+            //    // Create a trigger that will fire the task at this time every specific time of the day                
+            //    td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(3)});
 
-                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
-               
-                 // Create an action that will launch TaskScheduler whenever the trigger fires
-                td.Actions.Add(new ExecAction(realpath,null, null));
-                
-                
-                // Register the task in the root folder
-                ts.RootFolder.RegisterTaskDefinition("TaskScheduler", td);
+            //    td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(5) });
 
-                // Remove the task we just created
-                if(td.Actions  == null)
-                    ts.RootFolder.DeleteTask("TaskScheduler");
-            }
+            //    td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(7) });
+            //    //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
 
-            
+            //    // Create an action that will launch TaskScheduler whenever the trigger fires
+            //    td.Actions.Add(new ExecAction(realpath,null, null));
+
+
+            //    // Register the task in the root folder
+            //    ts.RootFolder.RegisterTaskDefinition("TaskScheduler", td);
+
+            //    // Remove the task we just created
+            //    if(td.Actions  == null)
+            //        ts.RootFolder.DeleteTask("TaskScheduler");
+            //}
+
+            TaskScheduler.startTaskBy6AM();
+            TaskScheduler.startTaskBy10AM();
+            TaskScheduler.startTaskBy12PM();
+            TaskScheduler.startTaskBy4PM();
+
 
             //Add another instance of the class 'Account' with AuthToken And ID, to create and manage another account
             Account _1stAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
@@ -266,6 +273,7 @@ namespace LendingClubSoftware
             }
         }
 
+        //This function creates a new Portfolio in the Account Logged in.
         public void createPortfolios(int actorId, string portfolioName, string portfolioDescription)
         {
             CreatePortfolioRequest _createPortfolioRequest = new CreatePortfolioRequest { ActorId = actorId, PortfolioName = portfolioName, PortfolioDescription = portfolioDescription };
@@ -295,6 +303,129 @@ namespace LendingClubSoftware
                 Console.WriteLine("Error {0}\nStackTrace {1}", ex.Message, ex.StackTrace);
             }
 
+        }
+    }
+
+    static class TaskScheduler
+    {
+        public static void startTaskBy6AM()
+        {
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+
+                // Create a trigger that will fire the task at this time every specific time of the day                
+                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(3) });
+                
+                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
+
+                // Create an action that will launch TaskScheduler whenever the trigger fires
+                td.Actions.Add(new ExecAction(realpath, null, null));
+
+
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition("TaskScheduler1", td);
+
+                // Remove the task we just created
+                if (td.Actions == null)
+                    ts.RootFolder.DeleteTask("TaskScheduler1");
+            }
+        }
+
+        public static void startTaskBy10AM()
+        {
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+
+                // Create a trigger that will fire the task at this time every specific time of the day                
+                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(5) });
+
+                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
+
+                // Create an action that will launch TaskScheduler whenever the trigger fires
+                td.Actions.Add(new ExecAction(realpath, null, null));
+
+
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition("TaskScheduler2", td);
+
+                // Remove the task we just created
+                if (td.Actions == null)
+                    ts.RootFolder.DeleteTask("TaskScheduler2");
+            }
+        }
+
+        public static void startTaskBy12PM()
+        {
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+
+                // Create a trigger that will fire the task at this time every specific time of the day                
+                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(7) });
+
+                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
+
+                // Create an action that will launch TaskScheduler whenever the trigger fires
+                td.Actions.Add(new ExecAction(realpath, null, null));
+
+
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition("TaskScheduler3", td);
+
+                // Remove the task we just created
+                if (td.Actions == null)
+                    ts.RootFolder.DeleteTask("TaskScheduler3");
+            }
+        }
+
+        public static void startTaskBy4PM()
+        {
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "TaskScheduler.exe");
+
+            using (TaskService ts = new TaskService())
+            {
+                // Create a new task definition and assign properties
+                TaskDefinition td = ts.NewTask();
+                td.RegistrationInfo.Description = "Automatic Investing into Lending Club";
+
+                // Create a trigger that will fire the task at this time every specific time of the day                
+                td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.Now.AddSeconds(10) });
+
+                //td.Triggers.Add(new DailyTrigger { StartBoundary = DateTime.ParseExact("05:40:00 PM", "hh:mm:ss tt", CultureInfo.InvariantCulture) });
+
+                // Create an action that will launch TaskScheduler whenever the trigger fires
+                td.Actions.Add(new ExecAction(realpath, null, null));
+
+
+                // Register the task in the root folder
+                ts.RootFolder.RegisterTaskDefinition("TaskScheduler4", td);
+
+                // Remove the task we just created
+                if (td.Actions == null)
+                    ts.RootFolder.DeleteTask("TaskScheduler4");
+            }
         }
     }
 }
