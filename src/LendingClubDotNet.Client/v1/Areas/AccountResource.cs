@@ -38,6 +38,11 @@ namespace LendingClubDotNet.Client.v1.Areas
 			return RequestUtility.ExecuteGetRequest<PortfoliosOwnedResponse>(string.Format("{0}accounts/{1}/portfolios", m_baseUrl, m_investorId), m_authorizationToken);
 		}
 
+        public FilterResponse GetFilters()
+        {
+            return RequestUtility.ExecuteGetRequest<FilterResponse>(string.Format("{0}accounts/{1}/filters", m_baseUrl, m_investorId), m_authorizationToken);
+        }
+
 		// Post operations
 		public CreatePortfolioResponse CreatePortfolio(CreatePortfolioRequest createPortfolioRequest)
 		{

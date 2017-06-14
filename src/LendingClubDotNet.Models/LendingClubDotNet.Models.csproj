@@ -49,6 +49,7 @@
     <Compile Include="Responses\AvailableCashResponse.cs" />
     <Compile Include="Responses\CreatePortfolioResponse.cs" />
     <Compile Include="Responses\DetailedNotesOwnedResponse.cs" />
+    <Compile Include="Responses\FilterResponse.cs" />
     <Compile Include="Responses\ListedLoansResponse.cs" />
     <Compile Include="Responses\NotesOwnedResponse.cs" />
     <Compile Include="Responses\PortfoliosOwnedResponse.cs" />
