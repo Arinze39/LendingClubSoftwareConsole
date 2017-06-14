@@ -49,6 +49,16 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\LendingClubDotNet.Client\LendingClubDotNet.Client.csproj">
+      <Project>{30e561aa-1169-4b3b-a133-05edb555b503}</Project>
+      <Name>LendingClubDotNet.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\LendingClubDotNet.Models\LendingClubDotNet.Models.csproj">
+      <Project>{259fa7e3-5bbf-4e84-a6a9-d64eb7b7ed62}</Project>
+      <Name>LendingClubDotNet.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
