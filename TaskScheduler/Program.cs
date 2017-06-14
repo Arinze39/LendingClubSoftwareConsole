@@ -19,8 +19,8 @@ namespace TaskScheduler
 
             //this changes the color of the text.
             Console.ForegroundColor = ConsoleColor.DarkGreen;
-            
-            
+
+
             //Console.WriteLine(DateTime.Now.ToLongTimeString());
             //System.Threading.Thread.Sleep(5000);
             //Console.WriteLine(DateTime.Now.ToLongTimeString());
@@ -32,7 +32,7 @@ namespace TaskScheduler
     {
         LendingClubV1Client Client;
         StringBuilder save_to_file = new StringBuilder();
-        public AutoInvest (string AuthorisationToken, string InvestorId)
+        public AutoInvest(string AuthorisationToken, string InvestorId)
         {
             Client = new LendingClubV1Client(AuthorisationToken, InvestorId);
             save_to_file.AppendLine(string.Format("Account logged in. {0}", time()));
@@ -51,13 +51,20 @@ namespace TaskScheduler
             AvailableCashResponse Avcash = new AvailableCashResponse();
             try
             {
+
                 Avcash = Client.AccountResource.GetAvailableCash();
+
                 cashBalance = Avcash.AvailableCash;
+                save_to_file.AppendLine(string.Format("AvailableCash got = {0}. {1}", cashBalance, time()));
+
                 noOfLoans = (int)cashBalance / 25;
+                save_to_file.AppendLine(string.Format("No_of_Loans_calculated = {0}. {1}", noOfLoans, time()));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error {0}\nStackTrace {1}", ex.Message, ex.StackTrace);
+                save_to_file.AppendLine(string.Format("Error {0}\nError occured in {1}\n{2}", ex.Message, ex.StackTrace, time()));
+
             }
             return noOfLoans;
         }
@@ -72,11 +79,34 @@ namespace TaskScheduler
                 getloans.Loans = new List<Loan>();
 
                 getloans = Client.LoanResource.GetListedLoans();
+                save_to_file.AppendLine(string.Format("Old Loans got. {}", time()));
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error {0}\nStackTrace {1}", ex.Message, ex.StackTrace);
+                save_to_file.AppendLine(string.Format("Error {0}\nError occured in {1}\n{2}", ex.Message, ex.StackTrace, time()));
+
+            }
+        }
+
+        public void Pull_New_Loans()
+        {
+            ListedLoansResponse getloans = new ListedLoansResponse();
+
+            try
+            {
+                getloans.Loans = new List<Loan>();
+
+                getloans = Client.LoanResource.GetListedLoans();
+                save_to_file.AppendLine(string.Format("New Loans got. {}", time()));
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error {0}\nStackTrace {1}", ex.Message, ex.StackTrace);
+                save_to_file.AppendLine(string.Format("Error {0}\nError occured in {1}\n{2}", ex.Message, ex.StackTrace, time()));
+
             }
         }
     }
