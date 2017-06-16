@@ -144,12 +144,13 @@ namespace LendingClubSoftware
         public void getDetailedNotesOwned()
         {           
             DetailedNotesOwnedResponse getDetailedNotes = new DetailedNotesOwnedResponse();
-
+            DetailedNote mDetailedNote = new DetailedNote();
             try
             {
                 Console.WriteLine("\nDetailedNotes Response\n");
 
                 getDetailedNotes.MyNotes = new List<DetailedNote>();
+                getDetailedNotes.MyNotes.Add(mDetailedNote);
 
                 getDetailedNotes = Client.AccountResource.GetDetailedNotesOwnedResponse();              
 
@@ -192,13 +193,13 @@ namespace LendingClubSoftware
         public void getNotesOwned()
         {
             NotesOwnedResponse getNotes = new NotesOwnedResponse(); 
-            //Note mNote = new Note();
+            Note mNote = new Note();
             try
             {
                 Console.WriteLine("\nNotesOwned Responses\n");
 
                 getNotes.MyNotes = new List<Note>();
-                //getNotes.MyNotes.Add(mNote);
+                getNotes.MyNotes.Add(mNote);
 
                 getNotes = Client.AccountResource.GetNotesOwned();               
 
@@ -228,12 +229,13 @@ namespace LendingClubSoftware
         public void getPorfolios()
         {
             PortfoliosOwnedResponse Portfolios = new PortfoliosOwnedResponse();
-
+            Portfolio mPortfolio = new Portfolio();
             try
             {
                 Console.WriteLine("\nPortfoliosOwned Response\n");
 
                 Portfolios.MyPortfolios = new List<Portfolio>();
+                Portfolios.MyPortfolios.Add(mPortfolio);
 
                 Portfolios = Client.AccountResource.GetPortfoliosOwned();
 
@@ -274,7 +276,9 @@ namespace LendingClubSoftware
         {
             CreatePortfolioRequest _createPortfolioRequest = new CreatePortfolioRequest { ActorId = actorId, PortfolioName = portfolioName, PortfolioDescription = portfolioDescription };
             CreatePortfolioResponse _createPortfolioResponse = new CreatePortfolioResponse();
+            CreatePortfolioResponseError mErrors = new CreatePortfolioResponseError();
             _createPortfolioResponse.Errors = new List<CreatePortfolioResponseError>();
+            _createPortfolioResponse.Errors.Add(mErrors);            
 
             try
             {

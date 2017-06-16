@@ -18,12 +18,8 @@ namespace TaskScheduler
             Console.Title = "Lending Club Software v1.0.0 AutoInvestor";
 
             //this changes the color of the text.
-            Console.ForegroundColor = ConsoleColor.DarkGreen;
-
-
-            //Console.WriteLine(DateTime.Now.ToLongTimeString());
-            //System.Threading.Thread.Sleep(5000);
-            //Console.WriteLine(DateTime.Now.ToLongTimeString());
+            Console.ForegroundColor = ConsoleColor.White;
+            
             Console.ReadKey();
         }
     }
@@ -70,9 +66,10 @@ namespace TaskScheduler
         }
 
         //This function pulls old Loans from LC
-        public void Pull_Old_Loans()
+        public void Pull_Notes()
         {
-            ListedLoansResponse getloans = new ListedLoansResponse();
+            NotesOwnedResponse getNotes = new NotesOwnedResponse();
+            Note myNotes = new Note();
 
             try
             {
