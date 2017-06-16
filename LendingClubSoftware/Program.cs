@@ -28,81 +28,30 @@ namespace LendingClubSoftware
 
             //this changes the color of the text.
             Console.ForegroundColor = ConsoleColor.White;
-
+            string attachmentFilepath = "";
 
 
             try
-            {
-                //MailMessage mail = new MailMessage("consoleApp@gmail.com", "arinzenne2017@gmail.com");
-                //SmtpClient client = new SmtpClient();
-                //client.Port = 25;
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //client.UseDefaultCredentials = false;
-                //client.Host = "smtp.google.com";
-                //mail.Subject = "this is a test email.";
-                //mail.Body = "this is my test email body";
-                //client.Send(mail);
-
-                //SmtpClient client = new SmtpClient();
-                //client.Port = 587;
-                //client.Host = "smtp.gmail.com";
-                //client.EnableSsl = true;
-                //client.Timeout = 10000;
-                //client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                //client.UseDefaultCredentials = false;
-                //client.Credentials = new System.Net.NetworkCredential("arinzenne2017@gmail.com", "password");
-                ////client.Host = "smtp.google.com";
-                //MailMessage mm = new MailMessage("arinzenne2017@gmail.com", "arinzenne2017@gmail.com", "test", "test");
-                //mm.BodyEncoding = UTF8Encoding.UTF8;
-                //mm.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
-
-                //client.Send(mm);
-
-
+            {                             
+                SmtpClient SmtpServer = new SmtpClient("smtpout.secureserver.net");
                 MailMessage mail = new MailMessage();
-                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com",587);
-
-                mail.From = new MailAddress("arinzenne2017@gmail.com");
-                mail.To.Add("nnenwageorgeglk2014@gmail.com");
-                mail.Subject = "Test Mail";
+                mail.From = new MailAddress("info@predacitycapital.com");
+                mail.To.Add("ayedalsabawi@gmail.com");
+                mail.Subject = "LC C# CODE HAS EXECUTED";
                 mail.Body = "This is for testing SMTP mail from GMAIL";
-
-                //SmtpServer.Port = 587;
-                SmtpServer.Credentials = CredentialCache.DefaultNetworkCredentials;
-                //SmtpServer.Credentials = new System.Net.NetworkCredential("username", "password");
+                SmtpServer.Port = 465;               
+                SmtpServer.Credentials = new NetworkCredential("info@predacitycapital.com", "#########");
                 SmtpServer.EnableSsl = true;
-
+                Attachment logFile = new Attachment(attachmentFilepath);
+                mail.Attachments.Add(logFile);
                 SmtpServer.Send(mail);
-                Console.WriteLine("Mail Sent");
+                Console.WriteLine("Mail Sent succesfully");
 
-
-                //var fromAddress = new MailAddress("nnenwageorgeglk2014@gmail.com", "Arinze");
-                //var toAddress = new MailAddress("arinzenne2017@gmail.com", "George");
-                //const string fromPassword = "Ge30061993";
-                //const string subject = "Subject";
-                //const string body = "Body";
-
-                //var smtp = new SmtpClient
-                //{
-                //    Host = "smtp.gmail.com",
-                //    Port = 587,
-                //    EnableSsl = true,
-                //    DeliveryMethod = SmtpDeliveryMethod.Network,
-                //    UseDefaultCredentials = false,
-                //    Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
-                //};
-                //using (var message = new MailMessage(fromAddress, toAddress)
-                //{
-                //    Subject = subject,
-                //    Body = body
-                //})
-                //{
-                //    smtp.Send(message); Console.WriteLine("Mail Sent");
-
-                //}
             }
             catch (Exception ex)
             { Console.WriteLine((ex.Message == null)? ex.InnerException.ToString() : ex.Message.ToString()); }
+
+
             //Register the TaskScheduler to automatically invest into LC
             // 
             //TaskScheduler.startTaskBy6AM();
