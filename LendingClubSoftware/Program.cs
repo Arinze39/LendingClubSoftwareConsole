@@ -27,30 +27,7 @@ namespace LendingClubSoftware
             Console.Title = "Lending Club Software v1.0.0";
 
             //this changes the color of the text.
-            Console.ForegroundColor = ConsoleColor.White;
-            string attachmentFilepath = "";
-
-
-            try
-            {                             
-                SmtpClient SmtpServer = new SmtpClient("smtpout.secureserver.net");
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("info@predacitycapital.com");
-                mail.To.Add("ayedalsabawi@gmail.com");
-                mail.Subject = "LC C# CODE HAS EXECUTED";
-                mail.Body = "This is for testing SMTP mail from GMAIL";
-                SmtpServer.Port = 465;               
-                SmtpServer.Credentials = new NetworkCredential("info@predacitycapital.com", "#########");
-                SmtpServer.EnableSsl = true;
-                Attachment logFile = new Attachment(attachmentFilepath);
-                mail.Attachments.Add(logFile);
-                SmtpServer.Send(mail);
-                Console.WriteLine("Mail Sent succesfully");
-
-            }
-            catch (Exception ex)
-            { Console.WriteLine((ex.Message == null)? ex.InnerException.ToString() : ex.Message.ToString()); }
-
+            Console.ForegroundColor = ConsoleColor.White;            
 
             //Register the TaskScheduler to automatically invest into LC
             // 
