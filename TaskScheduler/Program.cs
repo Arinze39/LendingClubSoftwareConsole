@@ -49,7 +49,6 @@ namespace TaskScheduler
         }
         public void Invest()
         {
-
             MaxLoans_to_Buy();
             Pull_NotesOwned();
             Pull_New_Loans();
@@ -308,6 +307,30 @@ namespace TaskScheduler
 
             }
             else { Console.WriteLine("Nothing to buy, so did not submit an order"); }
+
+            string filepath = savefile(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString(), save_to_file);
+
+            SendMail("A mail from Lending club software", filepath);
+        }
+
+        //This function saves the file to a folder in your documents directory.
+        private string savefile(string Directory, string file, StringBuilder text)
+        {
+            string filename = string.Format("{0}.txt",file);
+            string Dirpath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "LendingClub Software",Directory);
+            string filepath = Path.Combine(Dirpath, filename);
+
+            string newText = text.ToString();
+
+            using (FileStream fs = new FileStream(filepath, FileMode.Create, FileAccess.Write))
+            {
+                using (TextWriter tw = new StreamWriter(fs))
+                {
+                    tw.WriteLineAsync(newText);
+                }
+            }          
+
+                return filepath;
         }
     }
 }

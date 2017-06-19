@@ -1,28 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LendingClubDotNet.Client.v1;
 using LendingClubDotNet.Models.Responses;
 using LendingClubDotNet.Models.Requests;
 using Microsoft.Win32.TaskScheduler;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Net.Mail;
-using System.Net;
+using System.Runtime.InteropServices;
 
 namespace LendingClubSoftware
 {
     class Program
     {
+
+        [DllImport("kernel32.dll", ExactSpelling = true)]
+
+        private static extern IntPtr GetConsoleWindow();
+        private static IntPtr ThisConsole = GetConsoleWindow();
+
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);        
+        private const int MAXIMIZE = 3;
        
+
+
         //This is the entry point of the software.
         //This is the first code that will run when you start the software.
         static void Main(string[] args)
-        {      
-                          
+        {
+
+            //This shows the console window maximized.
+            ShowWindow(ThisConsole, MAXIMIZE);
+
+            //This makes sure the console window doesn't cut off outputs
+            Console.BufferHeight = short.MaxValue - 1;
+
             //This initializes the title of the software
             Console.Title = "Lending Club Software v1.0.0";
 
