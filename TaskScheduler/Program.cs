@@ -22,7 +22,11 @@ namespace TaskScheduler
 
             //this changes the color of the text.
             Console.ForegroundColor = ConsoleColor.White;
-            
+
+            //Enter your authorisationToken and InvestorID and PortfolioId and ActorID.
+            AutoInvest autoinvest = new AutoInvest("YOUR_AUTHORIZATIONTOKEN", "INVESTOR_ID", 000000, 999999);
+            autoinvest.Invest();
+
             Console.ReadKey();
         }
     }
