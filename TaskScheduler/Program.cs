@@ -27,7 +27,7 @@ namespace TaskScheduler
             AutoInvest autoinvest = new AutoInvest("YOUR_AUTHORIZATIONTOKEN", "INVESTOR_ID", 000000, 999999);
             autoinvest.Invest();
 
-            Console.ReadKey();
+           // Console.ReadKey();
         }
     }
 
@@ -48,16 +48,44 @@ namespace TaskScheduler
         {
             Client = new LendingClubV1Client(AuthorisationToken, InvestorId);
             save_to_file.AppendLine(string.Format("Account logged in. {0}", time()));
-            this._portfolioId = portfolioId;
-            this._actorId = actorId;
+            _portfolioId = portfolioId;
+            _actorId = actorId;
         }
+
         public void Invest()
         {
+            ListedLoansResponse getloans = new ListedLoansResponse();
+            Loan mLoans = new Loan();
+
+            try
+            {
+                getloans.Loans = new List<Loan>();
+                getloans.Loans.Add(mLoans);
+
+                //The number of old listed loans
+                int _1stcount = Client.LoanResource.GetListedLoans().Loans.Count;
+
+                do
+                {
+                    //wait for 100milliseconds
+                    System.Threading.Thread.Sleep(100);
+
+                    //the number of new listed loans
+                    int _2ndcount = Client.LoanResource.GetListedLoans().Loans.Count;
+                    //if the both numbers are not same move out of loop else continue looping
+                    if (_1stcount != _2ndcount) break;
+                    else continue;
+
+                }
+                while (true);
+            }
+            catch(Exception e) { Console.WriteLine("Error {0} \nStacktrace {1}", e.Message, e.StackTrace); }
+                       
             MaxLoans_to_Buy();
             Pull_NotesOwned();
             Pull_New_Loans();
             FilterLoans();
-        }
+        }        
 
         private void SendMail(string mailBody, string attachmentFilepath)
         {           
@@ -314,7 +342,7 @@ namespace TaskScheduler
 
             string filepath = savefile(DateTime.Now.ToShortDateString(), DateTime.Now.ToShortDateString(), save_to_file);
 
-            SendMail("A mail from Lending club software", filepath);
+            SendMail("A mail from Lending club software", filepath);            
         }
 
         //This function saves the file to a folder in your documents directory.

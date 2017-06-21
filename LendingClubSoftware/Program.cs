@@ -54,17 +54,15 @@ namespace LendingClubSoftware
             Account _1stAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
             Account _2ndAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
 
-            Console.WriteLine("Get AvailableCash 1stAccount\n");
-            _1stAcct.getAvailableCash(); 
-            _1stAcct.getSummary();
-            _1stAcct.getNotesOwned();
+            //This kickstarts the first account
+            _1stAcct.start("Ist Account");
 
-            Console.WriteLine("\nGet AvailableCash 2ndAcct\n\n");
+            _2ndAcct.start("2nd Account");
 
-            _2ndAcct.getAvailableCash(); 
-            _2ndAcct.getSummary(); 
-            _2ndAcct.getNotesOwned();
-                       
+            //_1stAcct.createPortfolios(11111, "PORTFOLIOID", "PORTFOLIODESCRIPTION");
+
+            //_2ndAcct.createPortfolios(22222, "PORTFOLIOID", "PORTFOLIODESCRIPTION");
+                                                         
             Console.ReadKey();
         }
     }
@@ -79,15 +77,26 @@ namespace LendingClubSoftware
            Client = new LendingClubV1Client(AuthorizationToken, InvestorId);
         }
 
+        public void start(string AcctName)
+        {
+            getAvailableCash(AcctName);
+            getSummary();
+            getNotesOwned();
+            getDetailedNotesOwned();
+            getPorfolios();
+            getFilters();
+        }
+
         //This function gets the current time of the PC
-        public string time()
+        private string time()
         {
             return DateTime.Now.ToString();
         }
         
         //This function gets the available cash of the account logged in
-        public void getAvailableCash()
-        {            
+        private void getAvailableCash(string AcctName)
+        {
+            Console.WriteLine("Get AvailableCash {0}",AcctName);
             AvailableCashResponse Avcash = new AvailableCashResponse();
            
             try
@@ -104,7 +113,7 @@ namespace LendingClubSoftware
         }
 
         //Function to get the summary of the logged in account
-        public void getSummary()
+        private void getSummary()
         {           
             SummaryResponse summary = new SummaryResponse();
 
@@ -131,7 +140,7 @@ namespace LendingClubSoftware
         }
 
         //This function gets the detailed notes owned.
-        public void getDetailedNotesOwned()
+        private void getDetailedNotesOwned()
         {           
             DetailedNotesOwnedResponse getDetailedNotes = new DetailedNotesOwnedResponse();
             DetailedNote mDetailedNote = new DetailedNote();
@@ -180,7 +189,7 @@ namespace LendingClubSoftware
         }
 
         //This function gets the Notes Owned by the Account Logged in
-        public void getNotesOwned()
+        private void getNotesOwned()
         {
             NotesOwnedResponse getNotes = new NotesOwnedResponse(); 
             Note mNote = new Note();
@@ -216,7 +225,7 @@ namespace LendingClubSoftware
         }
 
         //This function gets the portfolios owned by the Account Logged in.
-        public void getPorfolios()
+        private void getPorfolios()
         {
             PortfoliosOwnedResponse Portfolios = new PortfoliosOwnedResponse();
             Portfolio mPortfolio = new Portfolio();
@@ -243,7 +252,7 @@ namespace LendingClubSoftware
         }
 
         //This function gets the filters set by the Account Logged in.
-        public void getFilters()
+        private void getFilters()
         {
             FilterResponse getFilters = new FilterResponse();
 
