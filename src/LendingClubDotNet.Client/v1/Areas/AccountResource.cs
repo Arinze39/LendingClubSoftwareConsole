@@ -43,6 +43,11 @@ namespace LendingClubDotNet.Client.v1.Areas
             return RequestUtility.ExecuteGetRequest<FilterResponse>(string.Format("{0}accounts/{1}/filters", m_baseUrl, m_investorId), m_authorizationToken);
         }
 
+        public PendingTransferResponse GetPendingTransfers()
+        {
+            return RequestUtility.ExecuteGetRequest<PendingTransferResponse>(string.Format("{0}accounts/{1}/funds/pending", m_baseUrl, m_investorId), m_authorizationToken);
+        }
+
 		// Post operations
 		public CreatePortfolioResponse CreatePortfolio(CreatePortfolioRequest createPortfolioRequest)
 		{
@@ -53,6 +58,21 @@ namespace LendingClubDotNet.Client.v1.Areas
 		{
 			return RequestUtility.ExecutePostRequest<SubmitOrdersRequest, SubmitOrdersResponse>(submitOrdersRequest, string.Format("{0}accounts/{1}/orders", m_baseUrl, m_investorId), m_authorizationToken);
 		}
+
+        public CancelTransferFundsResponse CancelTransfers(CancelTransferFundsRequest cancelTransferFunds)
+        {
+            return RequestUtility.ExecutePostRequest<CancelTransferFundsRequest, CancelTransferFundsResponse>(cancelTransferFunds, string.Format("{0}accounts/{1}/funds/cancel", m_baseUrl, m_investorId), m_authorizationToken);
+        }
+
+        public AddFundsResponse AddFunds(AddFundsRequest addFundsRequest)
+        {
+            return RequestUtility.ExecutePostRequest<AddFundsRequest, AddFundsResponse>(addFundsRequest, string.Format("{0}accounts/{1}/funds/add", m_baseUrl, m_investorId), m_authorizationToken);
+        }
+
+        public WithdrawFundsResponse WithdrawFunds(WithdrawFundsRequest withdrawFundsRequest)
+        {
+            return RequestUtility.ExecutePostRequest<WithdrawFundsRequest, WithdrawFundsResponse>(withdrawFundsRequest, string.Format("{0}accounts/{1}/funds/withdraw", m_baseUrl, m_investorId), m_authorizationToken);
+        }
 
 		private readonly string m_baseUrl;
 

@@ -1,0 +1,17 @@
+{
+  "Account": [
+    {
+      "ActorId": "Enter_your_ActorId",
+      "AuthorisationToken": "Enter_Your_AuthorizationToken_Here",
+      "InvestorId": "Enter_Your_InvestorId_Here",
+      "PortfolioId": "Enter_Your_PortfolioId"
+    },
+    {
+      "ActorId": "Enter_your_ActorId",
+      "AuthorisationToken": "Enter_Your_AuthorizationToken_Here",
+      "InvestorId": "Enter_Your_InvestorId_Here",
+      "PortfolioId": "Enter_Your_PortfolioId"
+    }
+  ]
+
+}

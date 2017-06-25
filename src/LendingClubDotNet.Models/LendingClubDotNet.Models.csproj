@@ -44,17 +44,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Requests\AddFundsRequest.cs" />
+    <Compile Include="Requests\CancelTransferFundsRequest.cs" />
     <Compile Include="Requests\CreatePortfolioRequest.cs" />
     <Compile Include="Requests\SubmitOrderRequest.cs" />
+    <Compile Include="Requests\WithdrawFundsRequest.cs" />
+    <Compile Include="Responses\AddFundsResponse.cs" />
     <Compile Include="Responses\AvailableCashResponse.cs" />
+    <Compile Include="Responses\CancelTransferResponse.cs" />
     <Compile Include="Responses\CreatePortfolioResponse.cs" />
     <Compile Include="Responses\DetailedNotesOwnedResponse.cs" />
     <Compile Include="Responses\FilterResponse.cs" />
     <Compile Include="Responses\ListedLoansResponse.cs" />
     <Compile Include="Responses\NotesOwnedResponse.cs" />
+    <Compile Include="Responses\PendingTransferResponse.cs" />
     <Compile Include="Responses\PortfoliosOwnedResponse.cs" />
     <Compile Include="Responses\SubmitOrdersResponse.cs" />
     <Compile Include="Responses\SummaryResponse.cs" />
+    <Compile Include="Responses\WithdrawFundsResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

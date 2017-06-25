@@ -6,7 +6,8 @@ namespace LendingClubDotNet.Models.Requests
 	{
 		public int aid { get; set; }
 
-		public List<Order> orders { get; set; }
+		public List<Order> orders { get; set; }       
+
 	}
 
 	public sealed class Order

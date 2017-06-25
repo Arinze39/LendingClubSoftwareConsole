@@ -7,6 +7,9 @@ using Microsoft.Win32.TaskScheduler;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
+using TaskScheduler.Config;
+using Newtonsoft.Json;
+
 
 namespace LendingClubSoftware
 {
@@ -30,6 +33,10 @@ namespace LendingClubSoftware
         static void Main(string[] args)
         {
 
+            string myPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+            string myDir = Path.GetDirectoryName(myPath);
+            string realpath = Path.Combine(myDir, "Config.json");
+
             //This shows the console window maximized.
             ShowWindow(ThisConsole, MAXIMIZE);
 
@@ -40,7 +47,26 @@ namespace LendingClubSoftware
             Console.Title = "Lending Club Software v1.0.0";
 
             //this changes the color of the text.
-            Console.ForegroundColor = ConsoleColor.White;            
+            Console.ForegroundColor = ConsoleColor.White;
+
+            string text = "";
+            using (StreamReader str = new StreamReader(realpath))
+            {
+               text = str.ReadToEnd();
+            }                                                     
+
+           Configuration config = JsonConvert.DeserializeObject<Configuration>(text); 
+                        
+            foreach(var item in config.Account)
+            {
+                Console.WriteLine(item.ActorId);
+                Console.WriteLine(item.AuthorisationToken);
+                Console.WriteLine(item.PortfolioId);
+                Console.WriteLine(item.InvestorId);
+            }
+            Console.ReadKey();
+             
+            
 
             //Register the TaskScheduler to automatically invest into LC
             // 
@@ -51,13 +77,13 @@ namespace LendingClubSoftware
 
 
             //Add another instance of the class 'Account' with AuthToken And ID, to create and manage another account
-            Account _1stAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
-            Account _2ndAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
+            Account _1stAcct = new Account("","");
+            //Account _2ndAcct = new Account("YOUR_AUTHORISATION_TOKEN_GOES_HERE", "YOUR_INVESTOR_ID_GOES_HERE");
 
             //This kickstarts the first account
             _1stAcct.start("Ist Account");
 
-            _2ndAcct.start("2nd Account");
+           // _2ndAcct.start("2nd Account");
 
             //_1stAcct.createPortfolios(11111, "PORTFOLIOID", "PORTFOLIODESCRIPTION");
 
@@ -78,13 +104,30 @@ namespace LendingClubSoftware
         }
 
         public void start(string AcctName)
-        {
+        {                     
             getAvailableCash(AcctName);
             getSummary();
             getNotesOwned();
             getDetailedNotesOwned();
             getPorfolios();
             getFilters();
+            getPendingTransfers();
+
+
+            //You will need to set the transferFrequency inside the code.
+            //Here you supply args which are startDate,endate,amount and then the transferFrequency inside the method
+            //AddFunds(DateTime.Now, DateTime.Now, 24);
+
+            //Here you put an array of transferids
+            //CancelTransferFunds(new int[] { 12, 34, 23 });
+
+            //Here you put the portfolioid,portfolioname,portfolioDescrition
+            //createPortfolios(1111, "NAME", "PortfolioDescription");
+
+            //Here you enter the amount to withdraw
+            //WithdrawFunds(1111);
+
+
         }
 
         //This function gets the current time of the PC
@@ -269,9 +312,40 @@ namespace LendingClubSoftware
                 Console.WriteLine("Error {0}\nStackTrace {1]", ex.Message, ex.StackTrace);
             }
         }
+        
+        //This function gets the pending Transfers in the account
+        private void getPendingTransfers()
+        {
+            PendingTransferResponse pendingResponse = new PendingTransferResponse();
+            pendingTransfer _pendingTransfer = new pendingTransfer();
+            try
+            {
+                pendingResponse.transfers = new List<pendingTransfer>();
+                pendingResponse.transfers.Add(_pendingTransfer);
+
+                pendingResponse = Client.AccountResource.GetPendingTransfers();
+
+                foreach(var item in pendingResponse.transfers)
+                {
+                    Console.WriteLine("TransferId: {0}", item.transferId);
+                    Console.WriteLine("TransferDate: {0}", item.transferDate);
+                    Console.WriteLine("Amount: {0}", item.amount);
+                    Console.WriteLine("SourceAmount: {0}", item.sourceAccount);
+                    Console.WriteLine("Status: {0}", item.status);
+                    Console.WriteLine("Frequency: {0}", item.frequency);
+                    Console.WriteLine("EndDate: {0}", item.endDate);
+                    Console.WriteLine("Operation: {0}", item.operation);
+                    Console.WriteLine("Cancellable: {0}", item.cancellable.ToString());
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 
         //This function creates a new Portfolio in the Account Logged in.
-        public void createPortfolios(int actorId, string portfolioName, string portfolioDescription)
+        private void createPortfolios(int actorId, string portfolioName, string portfolioDescription)
         {
             CreatePortfolioRequest _createPortfolioRequest = new CreatePortfolioRequest { ActorId = actorId, PortfolioName = portfolioName, PortfolioDescription = portfolioDescription };
             CreatePortfolioResponse _createPortfolioResponse = new CreatePortfolioResponse();
@@ -303,6 +377,95 @@ namespace LendingClubSoftware
             }
 
         }
+
+        //This adds funds in the account logged in
+        private void AddFunds(DateTime _startDate,DateTime _endDate,double _amount)
+        {
+            AddFundsResponse addFundsResponse = new AddFundsResponse();
+            Frequency freq = new Frequency();
+            AddFundsRequest addFundsRequest = new AddFundsRequest
+            {
+                amount = _amount,
+                startDate = _startDate,
+                endDate = _endDate,
+                transferFrequency = freq.LOAD_NOW
+            };
+
+            try
+            {
+                addFundsResponse = Client.AccountResource.AddFunds(addFundsRequest);
+
+                Console.WriteLine("InvestorId: {0}", addFundsResponse.investorId);
+                Console.WriteLine("Amount: {0}", addFundsResponse.amount);
+                Console.WriteLine("TransferFrequency: {0}", addFundsResponse.transferFrequency);
+                Console.WriteLine("StartDate: {0}", addFundsResponse.startDate);
+                Console.WriteLine("EndDate {0}", addFundsResponse.endDate);
+                Console.WriteLine("EstimatedFundsTransferRate: {0}", addFundsResponse.estimatedFundsTransferDate);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        //This cancels transfers
+        private void CancelTransferFunds(int[] _transferId)
+        {
+            CancelTransferFundsResponse cancelResponse = new CancelTransferFundsResponse();
+            cancellationResults result = new cancellationResults();
+            CancelTransferFundsRequest cancelRequest = new CancelTransferFundsRequest
+            {
+                transferId = _transferId
+            };
+
+            try
+            {
+                
+                cancelResponse.CancelResult = new List<cancellationResults>();
+                cancelResponse.CancelResult.Add(result);
+
+                cancelResponse = Client.AccountResource.CancelTransfers(cancelRequest);
+
+                Console.WriteLine(cancelResponse.investorId);
+                foreach(var item in cancelResponse.CancelResult)
+                {
+                    Console.WriteLine("TransferId: {0}", item.transferId);
+                    Console.WriteLine("Status: {1}", item.status);
+                    Console.WriteLine("Message: {0}", item.message);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+
+        }
+
+        private void WithdrawFunds(int _amount)
+        {
+            WithdrawFundsResponse withdrawResponse = new WithdrawFundsResponse();
+            WithdrawFundsRequest withdrawRequest = new WithdrawFundsRequest
+            {
+                amount = _amount
+            };
+
+            try
+            {
+                withdrawResponse = Client.AccountResource.WithdrawFunds(withdrawRequest);
+
+                Console.WriteLine("Withdrawal InvestorId: {0}", withdrawResponse.investorId);
+                Console.WriteLine("Amount Withdrawn: {0}", withdrawResponse.amount);
+                Console.WriteLine("Withdrawal estimatedTransferDate: {0}", withdrawResponse.estimatedFundsTransferDate);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+        }
+
     }
 
     static class TaskScheduler
@@ -325,13 +488,12 @@ namespace LendingClubSoftware
                 // Create an action that will launch TaskScheduler whenever the trigger fires
                 td.Actions.Add(new ExecAction(realpath, null, null));
 
-
                 // Register the task in the root folder
                 ts.RootFolder.RegisterTaskDefinition("TaskScheduler6AM", td);
 
                 // Remove the task we just created
-                if (td.Actions == null)
-                    ts.RootFolder.DeleteTask("TaskScheduler6AM");
+                //if (td.Actions == null)
+                //    ts.RootFolder.DeleteTask("TaskScheduler6AM");
             }
         }
 
@@ -358,8 +520,8 @@ namespace LendingClubSoftware
                 ts.RootFolder.RegisterTaskDefinition("TaskScheduler10AM", td);
 
                 // Remove the task we just created
-                if (td.Actions == null)
-                    ts.RootFolder.DeleteTask("TaskScheduler10AM");
+                //if (td.Actions == null)
+                //    ts.RootFolder.DeleteTask("TaskScheduler10AM");
             }
         }
 
@@ -386,8 +548,8 @@ namespace LendingClubSoftware
                 ts.RootFolder.RegisterTaskDefinition("TaskScheduler2PM", td);
 
                 // Remove the task we just created
-                if (td.Actions == null)
-                    ts.RootFolder.DeleteTask("TaskScheduler2PM");
+                //if (td.Actions == null)
+                //    ts.RootFolder.DeleteTask("TaskScheduler2PM");
             }
         }
 
@@ -414,8 +576,8 @@ namespace LendingClubSoftware
                 ts.RootFolder.RegisterTaskDefinition("TaskScheduler6PM", td);
 
                 // Remove the task we just created
-                if (td.Actions == null)
-                    ts.RootFolder.DeleteTask("TaskScheduler6PM");
+                //if (td.Actions == null)
+                //    ts.RootFolder.DeleteTask("TaskScheduler6PM");
             }
         }
     }
