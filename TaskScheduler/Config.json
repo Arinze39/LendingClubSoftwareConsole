@@ -1,16 +1,28 @@
 {
+  "Test": true,
   "Account": [
     {
       "ActorId": "Enter_your_ActorId",
       "AuthorisationToken": "Enter_Your_AuthorizationToken_Here",
       "InvestorId": "Enter_Your_InvestorId_Here",
-      "PortfolioId": "Enter_Your_PortfolioId"
+      "PortfolioId": "Enter_Your_PortfolioId",
+      "SmtpClient": "smtpout.secureserver.net",
+      "MailFrom": "info@predacitycapital.com",
+      "MailTo": "ayedalsabawi@gmail.com",
+      "MailPassword": "#########",
+      "ServerPort": 465
+
     },
     {
       "ActorId": "Enter_your_ActorId",
       "AuthorisationToken": "Enter_Your_AuthorizationToken_Here",
       "InvestorId": "Enter_Your_InvestorId_Here",
-      "PortfolioId": "Enter_Your_PortfolioId"
+      "PortfolioId": "Enter_Your_PortfolioId",
+      "SmtpClient": "smtpout.secureserver.net",
+      "MailFrom": "info@predacitycapital.com",
+      "MailTo": "ayedalsabawi@gmail.com",
+      "MailPassword": "#########",
+      "ServerPort": 465
     }
   ]
 

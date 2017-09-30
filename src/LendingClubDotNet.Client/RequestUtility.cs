@@ -14,7 +14,7 @@ namespace LendingClubDotNet.Client
 			webRequest.ContentType = "application/x-www-form-urlencoded";
 			webRequest.Accept = "application/json";
 
-			webRequest.Headers.Add("Authorization", authorizationToken);
+			//webRequest.Headers.Add("Authorization", authorizationToken);
 
 			string jsonResponse;
 

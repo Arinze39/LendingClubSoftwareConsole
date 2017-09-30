@@ -1,0 +1,36 @@
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.dll
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.pdb
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.dll
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.dll
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.pdb
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.xml
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.csprojResolveAssemblyReference.cache
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.dll
+C:\code\LendingClubDotNet\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.pdb
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.dll
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.pdb
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.dll
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.dll
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.pdb
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.xml
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.csprojResolveAssemblyReference.cache
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.dll
+C:\code\LendingClubDotNet\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.pdb
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.dll
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.pdb
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.dll
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.pdb
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.csprojResolveAssemblyReference.cache
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.dll
+C:\Users\Arinze\Documents\Visual Studio 2015\Projects\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Client.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\LendingClubDotNet.Models.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.csprojResolveAssemblyReference.cache
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\src\LendingClubDotNet.Client\obj\Debug\LendingClubDotNet.Client.pdb

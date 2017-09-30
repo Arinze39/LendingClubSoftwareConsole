@@ -47,6 +47,7 @@
     <Compile Include="Requests\AddFundsRequest.cs" />
     <Compile Include="Requests\CancelTransferFundsRequest.cs" />
     <Compile Include="Requests\CreatePortfolioRequest.cs" />
+    <Compile Include="Requests\ReturnOrderBook.cs" />
     <Compile Include="Requests\SubmitOrderRequest.cs" />
     <Compile Include="Requests\WithdrawFundsRequest.cs" />
     <Compile Include="Responses\AddFundsResponse.cs" />

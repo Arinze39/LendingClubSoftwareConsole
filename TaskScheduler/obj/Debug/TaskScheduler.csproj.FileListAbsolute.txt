@@ -1,0 +1,14 @@
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\TaskScheduler.exe.config
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\TaskScheduler.exe
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\TaskScheduler.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\obj\Debug\TaskScheduler.csprojResolveAssemblyReference.cache
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\obj\Debug\TaskScheduler.exe
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\obj\Debug\TaskScheduler.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\LendingClubDotNet.Client.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\LendingClubDotNet.Models.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\LendingClubDotNet.Client.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\LendingClubDotNet.Models.pdb
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\bin\Debug\Config.json
+C:\Users\Arinze\GitHub\LendingClubSoftwareConsole\TaskScheduler\obj\Debug\TaskScheduler.csproj.TaskScheduler.exe.config
